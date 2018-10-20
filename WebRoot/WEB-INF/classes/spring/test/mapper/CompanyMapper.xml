@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="spring.test.dao.CompanyDao">
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+    <!--获得所有图书 -->
+    <select id="getAllCompanys" resultType="Company">
+        select id,name from company
+    </select>
+    <!--获得图书对象通过编号 -->
+    <select id="getCompanyById" resultType="Company">
+        select id,name from company where id=#{id}
+    </select>
+        <!--获得图书对象通过编号 -->
+    <select id="getNextId" resultType="int">
+        select next value for MYCATSEQ_ORDER
+    </select>
+    
+    <!-- 增加 -->
+    <insert id="add" parameterType="Company">
+        insert into company(id,name)values(#{id} ,#{name})
+    </insert>
+    <!-- 删除 -->
+    <delete id="delete">
+        delete from company where id=#{id}
+    </delete>
+    <!-- 更新 -->
+    <update id="update">
+        update company set title=#{name}
+        where id=#{id}
+    </update>
+</mapper>
